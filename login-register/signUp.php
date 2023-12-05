@@ -21,6 +21,7 @@
         $(document).ready(function(){
             $("#sub_btn").click(function(){
                 var phone = $("input[name='phone']").val();
+                var regexPhone = /((09|03|07|08|05|02)+([0-9]{8})\b)/g;
                 var password = $("input[name='password']").val();
                 var cf_password = $("input[name='confirm_password']").val();
                 var name = $("input[name='name']").val();
@@ -31,7 +32,7 @@
                 if (phone == "" || password == "" || cf_password == "" || name == "" || birthday == "" || address == "" || email == ""){
                     swal("Register Failure!", "Please fill in all the following information", "warning");
                 }else{
-                    if(regex.test(email)) {
+                    if(regex.test(email) && regexPhone.test(phone)) {
                         if (password == cf_password) {
                             $("#error-text").html("");
                             $("input[name='confirm_password']").css({"border":"1px solid black"})
@@ -53,7 +54,12 @@
                             $("#error-text").css({"color":"red","margin-bottom":"15px"});
                         }
                     }else{
-                        swal("SignUp Failure!", "Email không đúng định dạng", "warning");
+                        if (regex.test(email)==false){
+                            swal("SignUp Failure!", "Email không đúng định dạng", "warning");
+                        }
+                        else if (regexPhone.test(phone)==false){
+                            swal("SignUp Failure!", "Số điện thoại không đúng định dạng", "warning");
+                        }
                     }
                 }     
             });
