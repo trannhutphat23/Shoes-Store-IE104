@@ -44,11 +44,15 @@
                                 type: "POST",
                                 data: {phone: phone, password: password, name: name, birthday: birthday, address: address, email: email},
                                 success: function(data){
-                                    swal("CONGRATULATIONS!", "YOUR ACCOUNT HAS BEEN SUCCESFULLY CREATED", "success");
-                                    let asyn = setTimeout(function(){
-                                        cancelNoti();
-                                        clearTimeout(asyn);
-                                    },1000)
+                                    if (data == 1){
+                                        swal("CONGRATULATIONS!", "YOUR ACCOUNT HAS BEEN SUCCESFULLY CREATED", "success");
+                                        let asyn = setTimeout(function(){
+                                            cancelNoti();
+                                            clearTimeout(asyn);
+                                        },1000)
+                                    }else{
+                                        swal("SignUp Failure!", "Số điện thoại đã được sử dụng", "warning");
+                                    }
                                 }
                             });
                         }else{
