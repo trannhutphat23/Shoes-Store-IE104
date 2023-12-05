@@ -1,6 +1,5 @@
 <?php
     require '../connect.php';
-    // session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,9 +27,13 @@
                 var email = $("input[name='email']").val();
                 var regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
                 var birthday = $("input[name='birthday']").val();
+                var inputDate = new Date(birthday);
+                var now = new Date();
                 var address = $("input[name='address']").val();
                 if (phone == "" || password == "" || cf_password == "" || name == "" || birthday == "" || address == "" || email == ""){
                     swal("Register Failure!", "Please fill in all the following information", "warning");
+                }else if (inputDate > now){
+                    swal("SignUp Failure!", "Ngày không được lớn hơn ngày hiện tại", "warning");
                 }else{
                     if(regex.test(email) && regexPhone.test(phone)) {
                         if (password == cf_password) {
