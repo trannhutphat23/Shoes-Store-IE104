@@ -187,7 +187,7 @@
                 ?>
                 </div>
             <?php
-                $query = mysqli_query($conn, "SELECT SUM(GIATIEN) FROM giohang WHERE SDT = '$getSDT' AND KIEMTRA = 1");
+                $query = mysqli_query($conn, "SELECT SUM(GIATIEN * SOLUONG) FROM giohang WHERE SDT = '$getSDT' AND KIEMTRA = 1");
                 $query = mysqli_fetch_row($query);
                 $getSumPrice = $query[0];
             ?>

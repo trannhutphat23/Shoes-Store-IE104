@@ -52,5 +52,6 @@
                 $conn->query("INSERT INTO chitiet_donhang VALUE('$codeOrder', '$shoeNameID', '$size', '$shoename', '$color', '$price', '$amount', '$sum', '$name', '$phone', '$address', '$city', '$district', '$ward')");
             }
         }
+        $conn -> query("DELETE FROM giohang WHERE SDT = '$getSDT' AND KIEMTRA = 1");
     }
 ?>

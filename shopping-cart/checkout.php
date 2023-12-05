@@ -126,7 +126,7 @@
                 <div class="orderSummary">
                     <?php
                         if ($checkBuy == 2){
-                            $query = mysqli_query($conn, "SELECT SUM(GIATIEN) FROM giohang WHERE SDT = '$getSDT' AND KIEMTRA = 1");
+                            $query = mysqli_query($conn, "SELECT SUM(GIATIEN * SOLUONG) FROM giohang WHERE SDT = '$getSDT' AND KIEMTRA = 1");
                             $query = mysqli_fetch_row($query);
                             $getSumPrice = $query[0];
                     ?>
@@ -155,7 +155,7 @@
                                 $size = $rowData['KICH_THUOC'];
                         ?>
                             <div class="Items"> 
-                                <img id="imageItem" src="../images/<?php echo $arrImg[0]?>" alt="shoe">
+                                <img id="imageItem" src="../images/<?php echo $arrImg[0]?>" alt="shoe" style="margin-right: 10px; min-width: 150px">
                                 <div class="detail">
                                     <div class="context">
                                         <h3 style="margin-bottom: 20px;"><?php echo $rowData['MAGIAY']?></h3>
