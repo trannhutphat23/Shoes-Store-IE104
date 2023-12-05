@@ -62,38 +62,42 @@
                 var ward = $("#ward").val();
                 var address = $("#address").val();
                 var phone = $("#phone").val();
+                var regexPhone = /((09|03|07|08|05|02)+([0-9]{8})\b)/g;
                 var check = <?php echo $checkBuy?>;
 
                 var bankMethod = $("#bank").find(":selected").text();
                 if (name == "" || city == "" || district == "" || ward == "" || address == "" || phone == ""){
-                    swal("Register Failure!", "Please fill in all the following information", "warning");
+                    swal("Register Failure!", "Hãy điền đầy đủ thông tin!", "warning");
                 }else{
-                    $.ajax({
-                        url: "order.php",
-                        type: "POST",
-                        data: {
-                            name: name, 
-                            city: city, 
-                            district: district, 
-                            ward: ward, 
-                            address: address,
-                            phone: phone,
-                            bankMethod: bankMethod,
-                            check: check,
-                        },
-                        success: function(data){
-                            swal({
-                                title: "CONGRATULATIONS!",
-                                text: "ĐẶT HÀNG THÀNH CÔNG",
-                                icon: "success",
-                                closeOnClickOutside: false  
-                            })
-                            .then(() => {
-                                location.href = "shipping.php";
-                            })
-                        }
-                    })
-                    
+                    if (regexPhone.test(phone)){
+                        $.ajax({
+                            url: "order.php",
+                            type: "POST",
+                            data: {
+                                name: name, 
+                                city: city, 
+                                district: district, 
+                                ward: ward, 
+                                address: address,
+                                phone: phone,
+                                bankMethod: bankMethod,
+                                check: check,
+                            },
+                            success: function(data){
+                                swal({
+                                    title: "CONGRATULATIONS!",
+                                    text: "ĐẶT HÀNG THÀNH CÔNG",
+                                    icon: "success",
+                                    closeOnClickOutside: false  
+                                })
+                                .then(() => {
+                                    location.href = "shipping.php";
+                                })
+                            }
+                        })
+                    }else{
+                        swal("Checkout Failure!", "Số điện thoại không đúng định dạng", "warning");
+                    } 
                 }
             });
         })

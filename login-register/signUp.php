@@ -31,7 +31,7 @@
                 var now = new Date();
                 var address = $("input[name='address']").val();
                 if (phone == "" || password == "" || cf_password == "" || name == "" || birthday == "" || address == "" || email == ""){
-                    swal("Register Failure!", "Please fill in all the following information", "warning");
+                    swal("Register Failure!", "Hãy điền đầy đủ thông tin!", "warning");
                 }else if (inputDate > now){
                     swal("SignUp Failure!", "Ngày không được lớn hơn ngày hiện tại", "warning");
                 }else{
