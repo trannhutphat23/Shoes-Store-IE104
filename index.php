@@ -1,11 +1,11 @@
 <?php
-  require 'connect.php';
-  session_start();
-  if (isset($_SESSION['username']) && isset($_COOKIE['checkSignin'])){
-    $getUser = $_SESSION['username'];
-    $checkSignin = $_COOKIE['checkSignin'];
-    if ($checkSignin == 1){
-      echo "
+require 'connect.php';
+session_start();
+if (isset($_SESSION['username']) && isset($_COOKIE['checkSignin'])) {
+  $getUser = $_SESSION['username'];
+  $checkSignin = $_COOKIE['checkSignin'];
+  if ($checkSignin == 1) {
+    echo "
         <script>
           var check = confirm('You want to log out?');
           if (check == 1){
@@ -13,18 +13,16 @@
           }
         </script>
       ";
-    }
   }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link
-    rel="stylesheet"
-    href="./fontawesome-free-6.3.0-web/fontawsome/css/all.min.css"
-  />
+  <link rel="stylesheet" href="./fontawesome-free-6.3.0-web/fontawsome/css/all.min.css" />
   <link rel="stylesheet" href="./style.css" />
   <link rel="stylesheet" href="./login-register/login.css" />
   <link rel="stylesheet" href="./account/account.css" />
@@ -33,39 +31,37 @@
   <link rel="stylesheet" href="./shoe/shoe.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;300;400;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;300;400;700&display=swap" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <title>webbangiay</title>
 </head>
+
 <body>
   <script>
-    $(document).ready(function(){
-      $("#logout").click(function(){
+    $(document).ready(function() {
+      $("#logout").click(function() {
         $.ajax({
           url: './update_session.php',
           type: 'POST',
-          success: function(data){
+          success: function(data) {
             LogOut();
             userMenu();
           }
         })
       })
-      $("main").hover(function(){
+      $("main").hover(function() {
         $("#account").load('session_storage.php');
       })
-      $("button[type='submit']").click(function(){
+      $("button[type='submit']").click(function() {
         var val = $(".input").val();
-        if (val!=""){
-          routerPage("searchPage.php?search="+val)
-        }else{
+        if (val != "") {
+          routerPage("searchPage.php?search=" + val)
+        } else {
           swal({
-              title: "HÃY NHẬP GIÁ TRỊ",
-              icon: "warning",
-              closeOnClickOutside: false  
+            title: "HÃY NHẬP GIÁ TRỊ",
+            icon: "warning",
+            closeOnClickOutside: false
           })
         }
       })
@@ -84,9 +80,9 @@
           <p onclick="signIn()" class="unsigned">SIGN IN</p>
           <div class="userAccount">
             <p class="signed hidden" onclick="userMenu()">
-              <span id="account"><?php 
-                echo (isset($_SESSION['username']) && $_SESSION['username']!=NULL) ? $_SESSION['username'] : " ";
-              ?></span> 
+              <span id="account"><?php
+                                  echo (isset($_SESSION['username']) && $_SESSION['username'] != NULL) ? $_SESSION['username'] : " ";
+                                  ?></span>
               <i class="fa-solid fa-user"></i>
             </p>
             <div class="userMenu hidden">
@@ -153,17 +149,17 @@
       </div>
     </li>
     <li class="nav-brand">
-    <a href="#" onclick="BrandItem('Nike')">NIKE</a>
-        <a href="#" onclick="BrandItem('Adidas')">ADIDAS</a>
-        <a href="#" onclick="BrandItem('Biti\'s')">BITIS</a>
-        <a href="#" onclick="BrandItem('Vans')">VANS</a>
-        <a href="#" onclick="BrandItem('New Balance')">NEW BALANCE</a>
-        <a href="#" onclick="BrandItem('Converse')">CONVERSE</a>
+      <a href="#" onclick="BrandItem('Nike')">NIKE</a>
+      <a href="#" onclick="BrandItem('Adidas')">ADIDAS</a>
+      <a href="#" onclick="BrandItem('Biti\'s')">BITIS</a>
+      <a href="#" onclick="BrandItem('Vans')">VANS</a>
+      <a href="#" onclick="BrandItem('New Balance')">NEW BALANCE</a>
+      <a href="#" onclick="BrandItem('Converse')">CONVERSE</a>
     </li>
   </ul>
   <main id="display">
     <iframe src="./home-page/home.php" id="frame" scrolling="no">
-      
+
     </iframe>
   </main>
   <footer>
