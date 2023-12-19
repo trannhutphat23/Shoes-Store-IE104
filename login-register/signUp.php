@@ -1,8 +1,9 @@
 <?php
-    require '../connect.php';
+require '../connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +16,11 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>Login</title>
 </head>
+
 <body>
     <script>
-        $(document).ready(function(){
-            $("#sub_btn").click(function(){
+        $(document).ready(function() {
+            $("#sub_btn").click(function() {
                 var phone = $("input[name='phone']").val();
                 var regexPhone = /((09|03|07|08|05|02)+([0-9]{8})\b)/g;
                 var password = $("input[name='password']").val();
@@ -30,45 +32,58 @@
                 var inputDate = new Date(birthday);
                 var now = new Date();
                 var address = $("input[name='address']").val();
-                if (phone == "" || password == "" || cf_password == "" || name == "" || birthday == "" || address == "" || email == ""){
+                if (phone == "" || password == "" || cf_password == "" || name == "" || birthday == "" || address == "" || email == "") {
                     swal("Register Failure!", "Hãy điền đầy đủ thông tin!", "warning");
-                }else if (inputDate > now){
+                } else if (inputDate > now) {
                     swal("SignUp Failure!", "Ngày không được lớn hơn ngày hiện tại", "warning");
-                }else{
-                    if(regex.test(email) && regexPhone.test(phone)) {
+                } else {
+                    if (regex.test(email) && regexPhone.test(phone)) {
                         if (password == cf_password) {
                             $("#error-text").html("");
-                            $("input[name='confirm_password']").css({"border":"1px solid black"})
+                            $("input[name='confirm_password']").css({
+                                "border": "1px solid black"
+                            })
                             $.ajax({
                                 url: "./check_signUp.php",
                                 type: "POST",
-                                data: {phone: phone, password: password, name: name, birthday: birthday, address: address, email: email},
-                                success: function(data){
-                                    if (data == 1){
+                                data: {
+                                    phone: phone,
+                                    password: password,
+                                    name: name,
+                                    birthday: birthday,
+                                    address: address,
+                                    email: email
+                                },
+                                success: function(data) {
+                                    if (data == 1) {
                                         swal("CONGRATULATIONS!", "YOUR ACCOUNT HAS BEEN SUCCESFULLY CREATED", "success");
-                                        let asyn = setTimeout(function(){
+                                        let asyn = setTimeout(function() {
                                             cancelNoti();
                                             clearTimeout(asyn);
-                                        },1000)
-                                    }else{
+                                        }, 1000)
+                                    } else {
                                         swal("SignUp Failure!", "Số điện thoại đã được sử dụng", "warning");
                                     }
                                 }
                             });
-                        }else{
-                            $("input[name='confirm_password']").css({"border":"2px solid red"})
+                        } else {
+                            $("input[name='confirm_password']").css({
+                                "border": "2px solid red"
+                            })
                             $("#error-text").html("Password không trùng nhau!!");
-                            $("#error-text").css({"color":"red","margin-bottom":"15px"});
+                            $("#error-text").css({
+                                "color": "red",
+                                "margin-bottom": "15px"
+                            });
                         }
-                    }else{
-                        if (regex.test(email)==false){
+                    } else {
+                        if (regex.test(email) == false) {
                             swal("SignUp Failure!", "Email không đúng định dạng", "warning");
-                        }
-                        else if (regexPhone.test(phone)==false){
+                        } else if (regexPhone.test(phone) == false) {
                             swal("SignUp Failure!", "Số điện thoại không đúng định dạng", "warning");
                         }
                     }
-                }     
+                }
             });
         });
     </script>
@@ -84,9 +99,12 @@
             <input type="text" placeholder="ADDRESS" name="address" required>
         </div>
         <div id="error-text"></div>
-        <button type="submit" id="sub_btn" name="submit"><p>NEXT</p> </button>
+        <button type="submit" id="sub_btn" name="submit">
+            <p>NEXT</p>
+        </button>
     </main>
 </body>
 <script src="../app.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </html>
